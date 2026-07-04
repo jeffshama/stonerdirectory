@@ -3,7 +3,16 @@
 <head>
 <meta charset='UTF-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<!-- version: 2026-07-04-1940 -->
+<script>
+(function() {
+  const url = new URL(window.location.href);
+  if (!url.searchParams.has('v')) {
+    url.searchParams.set('v', Date.now());
+    window.location.replace(url.toString());
+  }
+})();
+</script>
+<!-- version: 2026-07-04-1947 -->
 <style>
 body { margin:0; font-family:Arial, sans-serif; background:#ffffff; }
 #splash {
