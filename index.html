@@ -1,4 +1,4 @@
-﻿<!-- version: 2026-07-04-1616 -->
+﻿<!-- version: 2026-07-04-1848 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -859,5 +859,15 @@
             searchInput.addEventListener('input', filterList);
         })();
     </script>
+<script>
+    (function(){
+        var url = window.location.href;
+        if (!url.includes('v=')) {
+            var v = Date.now();
+            var sep = url.includes('?') ? '&' : '?';
+            window.location.replace(url + sep + 'v=' + v);
+        }
+    })();
+</script>
 </body>
 </html>
