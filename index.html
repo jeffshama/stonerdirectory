@@ -1,4 +1,4 @@
-﻿<!-- version: 2026-07-04-1605 -->
+﻿<!-- version: 2026-07-04-1616 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +9,7 @@
         body { margin:0; font-family: Arial, sans-serif; }
         #searchbar { position:fixed; top:0; left:0; right:0; padding:10px; background:#C8E6C9; z-index:10; }
         #searchinput { width:100%; padding:8px; font-size:17px; box-sizing:border-box; }
-        #list { position:relative; margin-top:60px; margin-bottom:50vh; padding:10px; background:#E8F5E9; overflow-y:auto; }
+        #list { position:relative; margin-top:60px; margin-bottom:45vh; padding:10px; background:#E8F5E9; overflow-y:auto; }
         .list-item { display:flex; align-items:flex-start; padding:8px; border-bottom:1px solid #ccc; cursor:pointer; }
         .list-photo { width:60px; height:60px; object-fit:cover; border-radius:4px; margin-right:10px; }
         .list-text { flex:1; }
@@ -839,6 +839,7 @@
                 }, 2000);
             });
             window.showDetail = function(idx){
+                detail.style.display = 'none';
                 var panel = document.getElementById('detail-' + idx);
                 if (panel) {
                     detail.innerHTML = panel.innerHTML;
@@ -852,7 +853,7 @@
                 for (var i = 0; i < items.length; i++){
                     var item = items[i];
                     var fname = item.getAttribute('data-firstname') || '';
-                    item.style.display = fname.ToLower().IndexOf(term) != -1 ? 'flex' : 'none';
+                    item.style.display = fname.toLowerCase().indexOf(term) !== -1 ? 'flex' : 'none';
                 }
             }
             searchInput.addEventListener('input', filterList);
