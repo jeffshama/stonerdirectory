@@ -1,0 +1,15 @@
+﻿{
+  "name": "MMHTMLREP",
+  "short_name": "MMHTML",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#C8E6C9",
+  "icons": [
+    {
+      "src": "./images/splash.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
