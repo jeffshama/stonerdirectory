@@ -1,13 +1,13 @@
-{
+﻿{
   "name": "Stoner Directory",
-  "short_name": "Directory",
-  "start_url": "./index.html",
+  "short_name": "Stoner",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#E8F5E9",
   "theme_color": "#C8E6C9",
   "icons": [
     {
-      "src": "./images/splash.png",
+      "src": "images/splash.png",
       "sizes": "512x512",
       "type": "image/png"
     }
