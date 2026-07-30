@@ -1,19 +1,20 @@
-
 {
   "name": "Stoner Directory",
   "short_name": "StonerDir",
   "start_url": "index.html",
-  "scope": "./",
   "display": "standalone",
   "background_color": "#E8F5E9",
   "theme_color": "#C8E6C9",
-  "description": "Directory for The Villages",
   "icons": [
     {
       "src": "images/splash.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
+    },
+    {
+      "src": "images/silhouette.png",
+      "sizes": "256x256",
+      "type": "image/png"
     }
   ]
 }
