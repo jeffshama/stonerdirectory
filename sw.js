@@ -1,35 +1,37 @@
-const CACHE_VERSION = '20260826052108';
-const CACHE_NAME = 'stoner-cache-' + CACHE_VERSION;
 
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll([
-        'index.html',
-        'style.css',
-        'manifest.json',
-        'images/splash.png',
-        'images/silhouette.png'
-      ]);
-    })
+const CACHE_NAME = 'stoner-directory-20260913211736';
+const ASSETS = [
+  './',
+  './index.html',
+  './style.css',
+  './manifest.json',
+  './images/splash.png',
+  './images/og-preview.png',
+  './images/silhouette.png'
+];
+
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
   );
 });
 
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => {
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => {
       return Promise.all(
-        keys.filter(k => !k.includes(CACHE_VERSION))
-            .map(k => caches.delete(k))
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
       );
     })
   );
 });
 
-self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(resp => {
-      return resp || fetch(event.request);
-    })
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => response || fetch(e.request))
   );
 });
