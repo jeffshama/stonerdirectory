@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stoner-dir-20260915120027';
+const CACHE_NAME = 'stoner-dir-20260915154705';
 const ASSETS = [
   './',
   './index.html',
