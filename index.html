@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--Build: 09-15-26-1849 -->
+  <!--Build: 09-17-26-2201 -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:type" content="website">
@@ -16,14 +16,14 @@
   <meta name="twitter:title" content="Stoner Directory">
   <meta name="twitter:description" content="Stoner Directory">
   <meta name="twitter:image" content="https://jeffshama.github.io/stonerdirectory/images/og-preview.png">
-  <title>Build: 09-15-26-1849</title>
+  <title>Build: 09-17-26-2201</title>
   <link rel="stylesheet" href="style.css">
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <div id="titlebar">
     <span>Stoner Directory</span>
-    <span id="buildstamp"> Build: 09-15-26-1849</span>
+    <span id="buildstamp"> Build: 09-17-26-2201</span>
   </div>
   <input id="search" type="text" placeholder="Search Name, Village or Square" oninput="filterList()">
   <div id="list">
@@ -263,6 +263,13 @@
       <div class="list-info">
         <div class="name-line">Victoria M.</div>
         <div class="village-line">Orange Blossom <span class="badge">Spanish Springs</span></div>
+      </div>
+    </div>
+    <div class="list-item" data-firstname="test" data-village="el santiago" data-square="lake sumter landing" onclick="showDetail(43)">
+      <img class="thumb" src="./images/silhouette.png" alt="Photo" />
+      <div class="list-info">
+        <div class="name-line">test x.</div>
+        <div class="village-line">El Santiago <span class="badge">Lake Sumter</span></div>
       </div>
     </div>
   </div>
@@ -573,6 +580,15 @@
         <div class="detail-consumption">Joints</div>
       </div>
     </div>
+    <div id="detail-43" class="detail-content">
+      <img class="detail-thumb" src="./images/silhouette.png" alt="Photo" />
+      <div class="detail-info">
+        <div class="detail-name">test x.</div>
+        <div class="detail-email">jeffshama@hotmail.com</div>
+        <div class="detail-village">El Santiago <span class="badge">Lake Sumter</span></div>
+        <div class="detail-consumption"></div>
+      </div>
+    </div>
   </div>
   <div id="detail"></div>
   <div id="splash">
@@ -614,7 +630,7 @@
       }, 2000);
     });
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js?v=09-15-26-1849');
+      navigator.serviceWorker.register('sw.js?v=09-17-26-2201');
     }
   </script>
 </body>
