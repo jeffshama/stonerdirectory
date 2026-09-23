@@ -1,7 +1,3 @@
-/* ==========================================================
-   style.css — generated file. Overwritten every run. Do not edit by hand.
-   ========================================================== */
-
 * {
   box-sizing: border-box;
 }
@@ -9,244 +5,260 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
   height: 100%;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-  color: #1B1B1B;
-  background: #FFFFFF;
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ---------------------------------------------------------
-   TITLE BAR — spec §7.1
-   --------------------------------------------------------- */
+body {
+  background: #E8F5E9;
+}
+
 #titlebar {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   height: 48px;
-  background: #C8E6C9;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding: 0 10px;
+  background: #C8E6C9;
   z-index: 30;
 }
 
-#titlebar span:first-child {
-  font-size: 18px;
+#titlebar > span:first-child {
+  font-size: 20px;
   font-weight: 600;
 }
 
 #buildstamp {
   font-size: 13px;
+  white-space: nowrap;
   text-align: right;
-  white-space: pre;
 }
 
-/* ---------------------------------------------------------
-   SEARCH BAR — spec §2, §9 (exact override)
-   --------------------------------------------------------- */
 #search {
   position: fixed;
   top: 48px;
   left: 0;
-  right: 0;
   width: 100%;
+  height: 48px;
   font-size: 16px;
   padding: 6px;
   font-family: inherit;
   background: #F5F5F5;
-  border: none;
-  border-bottom: 1px solid #C8E6C9;
-  z-index: 29;
-  height: 48px;
+  border: 1px solid #bdbdbd;
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  z-index: 25;
 }
 
-/* ---------------------------------------------------------
-   LIST WINDOW — spec §7.3
-   --------------------------------------------------------- */
 #list {
   position: fixed;
   top: 96px;
   left: 0;
   right: 0;
-  bottom: 240px; /* reserve fixed detail-window space — spec §7.4 / §15 */
+  bottom: 0;
+  padding: 4px 0 244px 0;
   overflow-y: auto;
   background: #E8F5E9;
+  -webkit-overflow-scrolling: touch;
 }
 
-.list-item {
+.person-row {
+  width: 100%;
+  min-height: 62px;
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 5px 8px;
   cursor: pointer;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  flex-shrink: 0; /* prevent flexbox shrink-to-zero on small screens */
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-.list-item:last-child {
-  /* last list item MUST remain fully visible and selectable — spec §7.3 */
-  margin-bottom: 0;
+.person-row:focus,
+.person-row:hover {
+  outline: none;
+  background: rgba(200, 230, 201, 0.65);
 }
 
-.list-item .thumb {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  margin-right: 14px; /* spec §7.3 / §15 (REQUIRED) */
+.thumb {
+  width: 58px;
+  height: 52px;
+  flex: 0 0 58px;
+  margin-right: 14px;
   object-fit: contain;
   border-radius: 0;
-  background: #FFFFFF;
+  display: block;
 }
 
-.list-text {
-  display: flex;
-  flex-direction: column;
+.person-summary {
   min-width: 0;
+  flex: 1;
 }
 
-.list-name {
+.person-name {
   font-size: 17px;
-  font-weight: 600;
-}
-
-.list-village {
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 2px;
-}
-
-/* ---------------------------------------------------------
-   BADGE — spec §6, §8
-   --------------------------------------------------------- */
-.badge {
-  display: inline-block;
-  background: #00A6FB;
-  color: #FFFFFF;
-  font-size: 13px;
-  padding: 2px 8px;
-  border-radius: 10px;
-  line-height: 1.4;
+  line-height: 20px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* ---------------------------------------------------------
-   DETAIL WINDOW — spec §7.4 (fixed, 240px, two-column)
-   --------------------------------------------------------- */
+.person-location {
+  font-size: 15px;
+  line-height: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.square-badge {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 1px 6px;
+  background: #00A6FB;
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
+  border-radius: 3px;
+  vertical-align: middle;
+}
+
 #detail {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 240px; /* EXACTLY 240px — REQUIRED */
-  background: #F1F8E9;
+  height: 240px;
   display: none;
-  overflow: hidden; /* no vertical scrolling in detail window */
+  grid-template-columns: 40% 60%;
+  background: #F1F8E9;
   z-index: 20;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-top: 1px solid rgba(0,0,0,0.18);
+  overflow: hidden;
 }
 
 #detail.visible {
-  display: flex;
+  display: grid;
 }
 
-.detail-item {
-  display: flex;
-  width: 100%;
-  height: 100%;
+#detail > div {
+  min-width: 0;
+  min-height: 0;
 }
 
 .detail-photo {
-  width: 40%;
-  min-width: 40%; /* avoid tiny columns on narrow screens */
-  height: 100%;
+  width: 100%;
+  height: 240px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #FFFFFF;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .detail-photo img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* REQUIRED — never cover/crop */
-  border-radius: 0;    /* REQUIRED — no circular photos */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  display: block;
 }
 
 .detail-text {
-  width: 60%;
-  min-width: 0;
-  height: 100%;
-  padding: 8px 12px;
-  display: flex;
-  flex-direction: column; /* stacked detail layout — spec §13 */
-  justify-content: flex-start;
-  gap: 3px; /* tightened spacing */
+  width: 100%;
+  height: 240px;
+  padding: 8px 10px;
   overflow: hidden;
+  overflow-wrap: anywhere;
 }
 
 .detail-name {
   font-size: 19px;
+  line-height: 23px;
+  margin-bottom: 3px;
   font-weight: 600;
-  overflow-wrap: break-word;
 }
 
 .detail-email {
   font-size: 16px;
-  overflow-wrap: break-word;
+  line-height: 20px;
+  margin-bottom: 3px;
 }
 
-.detail-village {
+.detail-location {
   font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  line-height: 21px;
+  margin-bottom: 3px;
 }
 
 .detail-consumption {
   font-size: 15px;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
+  line-height: 19px;
+  white-space: normal;
 }
 
-/* ---------------------------------------------------------
-   SPLASH SCREEN — spec §5
-   --------------------------------------------------------- */
 #splash {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  background: #FFFFFF;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  background: #fff;
+  z-index: 1000;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 #splash img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  border-radius: 0;
 }
 
 #splash.splash-exit {
-  opacity: 0;
-  transform: translateY(-100%);
+  animation: splashExit 0.7s ease-in forwards;
+  pointer-events: none;
 }
 
-/* ---------------------------------------------------------
-   MOBILE READABILITY RULES — spec §13
-   --------------------------------------------------------- */
-@media (max-width: 480px) {
-  .list-name { font-size: 17px; } /* enforce minimum font sizes */
-  .detail-name { font-size: 19px; }
-  .list-item, .detail-photo, .detail-text {
-    flex-shrink: 0; /* prevent flexbox shrink-to-zero */
+@keyframes splashExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 600px) {
+  #titlebar > span:first-child {
+    font-size: 18px;
+  }
+
+  #buildstamp {
+    font-size: 13px;
+  }
+
+  .thumb {
+    width: 54px;
+    height: 50px;
+    flex-basis: 54px;
+    margin-right: 14px;
+  }
+
+  #detail {
+    grid-template-columns: 40% 60%;
+  }
+
+  .detail-text {
+    padding: 7px 8px;
   }
 }

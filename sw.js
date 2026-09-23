@@ -1,6 +1,4 @@
-// sw.js — generated file. Overwritten every run. Do not edit by hand.
-
-const CACHE_VERSION = "20260918081539";
+const CACHE_VERSION = "20260923172813";
 const CACHE_NAME = "stoner-directory-" + CACHE_VERSION;
 
 const CORE_ASSETS = [
@@ -9,44 +7,47 @@ const CORE_ASSETS = [
   "./style.css",
   "./manifest.json",
   "./images/splash.png",
+  "./images/og-preview.png",
   "./images/silhouette.png"
 ];
 
-self.addEventListener("install", (event) => {
+self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE_ASSETS))
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", event => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
+    caches.keys()
+      .then(keys => Promise.all(
         keys
-          .filter((key) => key !== CACHE_NAME) // auto purge old caches on version change
-          .map((key) => caches.delete(key))
-      )
-    )
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      ))
+      .then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-self.addEventListener("fetch", (event) => {
+self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET")
+    return;
+
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      if (cached) {
+    caches.match(event.request).then(cached => {
+      if (cached)
         return cached;
-      }
-      return fetch(event.request)
-        .then((response) => {
-          if (response && response.ok) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
+
+      return fetch(event.request).then(response => {
+        if (!response || response.status !== 200 || response.type === "opaque")
           return response;
-        })
-        .catch(() => cached);
+
+        const copy = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+        return response;
+      }).catch(() => caches.match("./index.html"));
     })
   );
 });
